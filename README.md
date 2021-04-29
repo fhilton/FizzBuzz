@@ -1,5 +1,7 @@
 # Fizz Buzz
 
+![Build Status](https://github.com/fhilton/FizzBuzz/actions/workflows/dotnet.yml/badge.svg)
+
 ## Overview 
 
 Fizz buzz Is a [children's game to teach division](https://en.wikipedia.org/wiki/Fizz_buzz).
