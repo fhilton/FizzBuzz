@@ -28,7 +28,7 @@ This repository contains an example Fizz Buzz implementation in C#.
           $"{fizzBuzzResponse.Index}: {fizzBuzzResponse.FizzBuzz}");
   }
 ```
-  See [ExampleConsoleApp/Program.cs]('./ExampleConsoleApp/Program.cs)) for an example.
+  See [ExampleConsoleApp/Program.cs](ExampleConsoleApp/Program.cs) for an example.
 
 
 ## Running Tests
