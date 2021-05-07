@@ -29,7 +29,7 @@ namespace FizzBuzzGenerator
                 .Select(i => GetOutput((Int16) i, args.Options)).ToList();
         }
 
-        private static FbResponse GetOutput(Int16 i, List<FbOption> options)
+        private static FbResponse GetOutput(int i, List<FbOption> options)
         {
             var fizzBuzz = new StringBuilder();
 
@@ -45,9 +45,9 @@ namespace FizzBuzzGenerator
         }
     }
 
-    public record FbResponse(Int16 Index, string Output);
+    public record FbResponse(int Index, string Output);
 
-    public record FbOption(Int16 Divisor, string Output);
+    public record FbOption(int Divisor, string Output);
 
-    public record FbArgs(Int16 Min, Int16 Max, List<FbOption> Options);
+    public record FbArgs(int Min, int Max, List<FbOption> Options);
 }
