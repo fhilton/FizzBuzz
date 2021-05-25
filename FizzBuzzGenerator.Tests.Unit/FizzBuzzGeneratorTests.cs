@@ -13,15 +13,15 @@ namespace FizzBuzzGenerator.Tests.Unit
         [Fact]
         public void Allows_Min_Max_Input()
         {
-            var results = FbGenerator.Generate(new FbArgs(0, Int16.MaxValue, new List<FbOption>()
+            var results = FbGenerator.Generate(new FbArgs(0, int.MaxValue, new List<FbOption>()
             {
                 new(3, "Fizz"),
                 new(5, "Buzz")
-            }));
+            })).Take(10).ToArray();
 
             Assert.NotEmpty(results);
-
-            Assert.Equal(Int16.MaxValue + 1, results.Count);
+            
+            Assert.Equal(10, results.Count());
         }
 
         [Fact]
@@ -43,11 +43,23 @@ namespace FizzBuzzGenerator.Tests.Unit
             {
                 new(3, "Fizz"),
                 new(5, "Buzz")
-            }));
+            })).ToArray();
 
             Assert.Single(results);
 
             Assert.Equal("FizzBuzz", results.Where(r => r.Index == 15).First().Output);
+        }
+        
+        [Fact]
+        public void Returns_Correct_Number_Of_Results()
+        {
+            var results = FbGenerator.Generate(new FbArgs(0, 4, new List<FbOption>()
+            {
+                new(3, "Fizz"),
+                new(5, "Buzz")
+            })).ToArray();
+
+            Assert.Equal(5, results.Length);
         }
 
         [Fact]
@@ -57,7 +69,7 @@ namespace FizzBuzzGenerator.Tests.Unit
             {
                 new(3, "Fizz"),
                 new(5, "Buzz")
-            }));
+            })).ToArray();
 
             Assert.NotEmpty(results);
 
@@ -74,7 +86,7 @@ namespace FizzBuzzGenerator.Tests.Unit
                 new(2, "Pfft"),
                 new(3, "Fizz"),
                 new(5, "Buzz")
-            }));
+            })).ToArray();
 
             Assert.NotEmpty(results);
 
@@ -88,7 +100,7 @@ namespace FizzBuzzGenerator.Tests.Unit
         [Fact]
         public void Works_For_Empty_Options()
         {
-            var results = FbGenerator.Generate(new FbArgs(1, 20, new List<FbOption>()));
+            var results = FbGenerator.Generate(new FbArgs(1, 20, new List<FbOption>())).ToArray();
 
             Assert.NotEmpty(results);
 
@@ -106,7 +118,7 @@ namespace FizzBuzzGenerator.Tests.Unit
                 new(3, "Fizz"),
                 new(3, "Fizz"),
                 new(5, "Buzz")
-            }));
+            })).ToArray();
 
             Assert.NotEmpty(results);
 
@@ -123,7 +135,7 @@ namespace FizzBuzzGenerator.Tests.Unit
                 {
                     new(3, "Fizz"),
                     new(5, "Buzz")
-                })));
+                })).ToArray());
 
             Assert.Equal("FizzBuzzArgs Max must be greater than or equal to Min", ex.Message);
         }
@@ -131,7 +143,7 @@ namespace FizzBuzzGenerator.Tests.Unit
         [Fact]
         public void Null_Args_Are_Handled()
         {
-            Exception ex = Assert.Throws<ArgumentException>(() => FbGenerator.Generate(null));
+            Exception ex = Assert.Throws<ArgumentException>(() => FbGenerator.Generate(null).ToArray());
 
             Assert.Equal("FizzBuzzArgs cannot be null (Parameter 'args')", ex.Message);
         }
@@ -140,7 +152,7 @@ namespace FizzBuzzGenerator.Tests.Unit
         public void Null_Options_Are_Handled()
         {
             Exception ex =
-                Assert.Throws<ArgumentException>(() => FbGenerator.Generate(new FbArgs(0, Int16.MaxValue, null)));
+                Assert.Throws<ArgumentException>(() => FbGenerator.Generate(new FbArgs(0, Int16.MaxValue, null)).ToArray());
 
             Assert.Equal("FizzBuzzArgs Options cannot be null (Parameter 'Options')", ex.Message);
         }
@@ -153,7 +165,7 @@ namespace FizzBuzzGenerator.Tests.Unit
             {
                 new(3, null),
                 new(5, "Buzz")
-            }));
+            })).ToArray();
 
             Assert.NotEmpty(results);
 

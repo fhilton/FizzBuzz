@@ -8,7 +8,7 @@ namespace FizzBuzzGenerator
 {
     public static class FbGenerator
     {
-        public static List<FbResponse> Generate(FbArgs args)
+        public static IEnumerable<FbResponse> Generate(FbArgs args)
         {
             if (args == null)
             {
@@ -25,8 +25,13 @@ namespace FizzBuzzGenerator
                 throw new ArgumentException("FizzBuzzArgs Max must be greater than or equal to Min");
             }
 
-            return Enumerable.Range(args.Min, args.Max - args.Min + 1)
-                .Select(i => GetOutput((Int16) i, args.Options)).ToList();
+            var i = args.Min;
+
+            while (i <= args.Max)
+            {
+                yield return GetOutput(i, args.Options);
+                i++;
+            }
         }
 
         private static FbResponse GetOutput(int i, List<FbOption> options)
